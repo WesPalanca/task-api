@@ -18,6 +18,8 @@ paths:
       summary: List all tasks
       tags:
         - Tasks
+      parameters:
+        - $ref: '#/components/parameters/Completed'
       responses:
         '200':
           description: OK
@@ -27,6 +29,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+                examples:
+                  - error: bad request
+                  
+
+
     post:
       summary: Create a new task
       tags:
@@ -92,3 +108,14 @@ components:
         completed:
           type: boolean
           example: false
+  parameters:
+    Completed:
+      name: completed
+      in: query
+      required: false
+      description: completion
+      schema:
+        type: boolean
+        
+
+
